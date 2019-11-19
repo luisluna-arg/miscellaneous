@@ -1,0 +1,9 @@
+SELECT
+    GROUP_COLUMN "GROUPER",
+    LISTAGG (CONCAT_COLUMN, ', ') WITHIN GROUP (ORDER BY ORDER_COLUMN1, ORDER_COLUMN2) "VALUES"
+FROM
+    TABLE
+WHERE
+    /* Filter condition */
+GROUP BY
+    /* Order field */;
