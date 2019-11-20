@@ -1,27 +1,32 @@
-let _benchmark = new function (){
-    let _startDate: null;
-    let _endDate: null;
-    let _duration: null;
-    let _message: "";
+let _benchmark = function () {
+    let _startDate = null;
+    let _endDate = null;
+    let _duration = null;
+    let _message = "";
 
-    this.start: (message) => {
+    this.start = (message) => {
         _startDate = new Date();
         _endDate = null;
         _duration = null;
 
-        if (message) _message = message;
-
-        return this;
-    }; 
-	
-    this.stop: () => {
-        _endDate = new Date();
-        _duration = _endDate.getTime() - _startDate.getTime();
+        if (message) {
+            _message = message;
+            console.log(_message);
+        }
 
         return this;
     };
-	
-    this.show: () => {
+
+    this.stop = () => {
+        _endDate = new Date();
+        _duration = _endDate.getTime() - _startDate.getTime();
+
+        this.show();
+
+        return this;
+    };
+
+    this.show = () => {
         if (_startDate == null) {
             console.log("No iniciado");
             return this;
@@ -32,10 +37,14 @@ let _benchmark = new function (){
             return this;
         }
 
+        let log = "";
         if (_message && _message != "")
-            console.log(_message);
-        console.log("Inicio: ", _startDate, " Fin: ", _endDate);
-        console.log("Duración (ms): ", _duration);
+            log += "Fin: " + _message + ", ";
+        //console.log("Inicio: ", _startDate, " Fin: ", _endDate);
+
+        log += "Duración (ms): " + _duration;
+
+        console.log(log);
 
         return this;
     };
