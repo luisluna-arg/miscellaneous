@@ -4,16 +4,21 @@ let _benchmark = function () {
     let _duration = null;
     let _message = "";
 
-    this.start = (message) => {
+    this.start = (message, show) => {
         _startDate = new Date();
         _endDate = null;
         _duration = null;
+        _showStart = show != undefined && show != null && show;
 
         if (message) {
-            _message = message;
-            console.log(_message);
+			_message = message;
+								  
         }
 
+        if (_showStart){
+        console.log(_message);
+        }
+        
         return this;
     };
 
@@ -38,9 +43,10 @@ let _benchmark = function () {
         }
 
         let log = "";
-        if (_message && _message != "")
+        if (_message && _message != "") {
             log += "Fin: " + _message + ", ";
-        //console.log("Inicio: ", _startDate, " Fin: ", _endDate);
+		}
+        /* console.log("Inicio: ", _startDate, " Fin: ", _endDate); */
 
         log += "Duración (ms): " + _duration;
 
@@ -48,4 +54,4 @@ let _benchmark = function () {
 
         return this;
     };
-};
+    };
