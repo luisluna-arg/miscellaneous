@@ -4,21 +4,20 @@ let _benchmark = function () {
     let _duration = null;
     let _message = "";
 
-    this.start = (message, show) => {
+    this.start = (message, showStart) => {
         _startDate = new Date();
         _endDate = null;
         _duration = null;
-        _showStart = show != undefined && show != null && show;
+        _showStart = showStart != undefined && showStart != null && showStart;
 
         if (message) {
-			_message = message;
-								  
+            _message = message;
         }
 
-        if (_showStart){
-        console.log(_message);
+        if (_showStart) {
+            console.log(_message);
         }
-        
+
         return this;
     };
 
@@ -45,7 +44,7 @@ let _benchmark = function () {
         let log = "";
         if (_message && _message != "") {
             log += "Fin: " + _message + ", ";
-		}
+        }
         /* console.log("Inicio: ", _startDate, " Fin: ", _endDate); */
 
         log += "Duración (ms): " + _duration;
@@ -54,4 +53,4 @@ let _benchmark = function () {
 
         return this;
     };
-    };
+};
