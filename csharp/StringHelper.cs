@@ -45,21 +45,21 @@ namespace Helpers
             int internalIndex = 0;
             for (int startIndex = 0; startIndex < this.Length; startIndex++)
             {
-                /* Verifica si el selector entra en lo que queda de cadena */
+                /* Checks if the selector fits in the remaining string */
                 if ((this.builder.Length - 1) - startIndex < 0)
                 {
-                    /* Si el resultado es negativo quedan menos caracteres de los necesarios */
+                    /* If result is negative, there are fewer characters than needed */
                     break;
                 }
 
                 internalIndex = startIndex;
 
-                /* Recorre los caracteres del selector para ver si coincide con los de la cadena */
+                /* Loops over the selector characters to see if they are cotained in the string */
                 for (int j = 0; j < selector.Length; j++)
                 {
                     if (this.builder[internalIndex] != selector[j])
                     {
-                        /* Terminar el ciclo interno porque no encuentra el selector */
+                        /* Selector is not found, so end the internal loop */
                         break;
                     }
                     else if (j == selector.Length - 1)
@@ -70,11 +70,12 @@ namespace Helpers
 
                 if (foundSelector)
                 {
-                    /* Corta el ciclo principal porque ya encontro la palabra */
+                    /* Selector is found, then finish loop */
                     break;
                 }
             }
 
+            /* Replace selector in the string, according to calculated indexes */
             this.builder.Replace(selector, replacement, internalIndex, selector.Length);
 
             return this;
