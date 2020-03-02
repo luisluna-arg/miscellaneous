@@ -1,0 +1,17 @@
+/* A query that returns all privileges granted */
+SELECT  
+    T.OWNER,
+    T.GRANTOR CONCEDIDO_POR,  
+    T.GRANTEE BENEFICIADO,
+    T.TABLE_NAME TABLA,
+    T.PRIVILEGE PRIVILEGIO
+FROM 
+    DBA_TAB_PRIVS T 
+WHERE 
+    T.OWNER LIKE '%OWNER%'
+ORDER BY 
+    T.OWNER,
+    T.GRANTEE,
+    T.TABLE_NAME,
+    T.GRANTOR,
+    T.PRIVILEGE
