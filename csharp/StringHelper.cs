@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Helpers
 {
+    /// <summary>
+    /// Clase de soporte a la clase StringBuilder. Utilizar para consumir menos memoria en el armado de cadenas de texto.
+    /// </summary>
     public class StringHelper : System.IDisposable
     {
         private StringBuilder builder;
@@ -86,10 +89,10 @@ namespace Helpers
             if (this.builder.Length < selector.Length) return this;
             bool foundSelector = false;
             int internalIndex = 0;
-            for (int startIndex = 0; startIndex < this.Length; startIndex++)
+            for (int startIndex = 0; startIndex < this.Length && !foundSelector; startIndex++)
             {
                 /* Verifica si el selector entra en lo que queda de cadena */
-                if ((this.builder.Length - 1) - startIndex < 0)
+                if (this.Length - 1 - startIndex < selector.Length - 1)
                 {
                     /* Si el resultado es negativo quedan menos caracteres de los necesarios */
                     break;
@@ -100,25 +103,23 @@ namespace Helpers
                 /* Recorre los caracteres del selector para ver si coincide con los de la cadena */
                 for (int j = 0; j < selector.Length; j++)
                 {
-                    if (this.builder[internalIndex] != selector[j])
+                    if (this.builder[internalIndex + j] != selector[j])
                     {
                         /* Terminar el ciclo interno porque no encuentra el selector */
                         break;
                     }
-                    else if (j == selector.Length - 1)
+
+                    if (j == selector.Length - 1)
                     {
                         foundSelector = true;
                     }
                 }
-
-                if (foundSelector)
-                {
-                    /* Corta el ciclo principal porque ya encontro la palabra */
-                    break;
-                }
             }
 
-            this.builder.Replace(selector, replacement, internalIndex, selector.Length);
+            if (foundSelector)
+            {
+                this.builder.Replace(selector, replacement, internalIndex, selector.Length);
+            }
 
             return this;
         }
@@ -246,6 +247,7 @@ namespace Helpers
         /// <param name="newString"></param>
         /// <returns></returns>
         public static StringHelper operator + (StringHelper builder, string newString) {
+		 
             builder.Add(newString);
             return builder;
         }
