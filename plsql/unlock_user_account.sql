@@ -12,3 +12,8 @@ If you unlock an account but do not reset the password then
 the password remains expired. The first time someone
 connects as that user, they must change the user's password.
 */
+
+/* To avoid password expire set reuse and life time to unlimited */
+alter profile DEFAULT limit PASSWORD_REUSE_TIME unlimited;
+
+alter profile DEFAULT limit PASSWORD_LIFE_TIME  unlimited;
