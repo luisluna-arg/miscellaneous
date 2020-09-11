@@ -1,0 +1,4 @@
+Ubicacion del EXE
+C:\app\Administrator\product\11.2.0\dbhome_1\BIN
+
+expdp user/password DUMPFILE=DUMP_FILE_NAME.dmp LOGFILE=DUMP_FILE_NAME.log SCHEMAS=DUMP_FILE_NAME
